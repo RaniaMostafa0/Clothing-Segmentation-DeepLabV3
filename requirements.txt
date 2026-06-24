@@ -1,0 +1,8 @@
+torch==2.5.1+cu121
+torchvision==0.20.1+cu121
+datasets==5.0.0
+matplotlib==3.10.9
+numpy==2.4.4
+Pillow==12.2.0
+tqdm==4.67.3
+streamlit==1.58.0

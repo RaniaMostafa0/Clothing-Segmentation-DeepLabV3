@@ -70,6 +70,8 @@ The model was additionally tested on 45 personal photographs beyond the ATR test
   - Segmentation degrades with 4-6+ people in frame.
   - Occasional misclassification on unusual camera angles (e.g. overhead shots).
 
+markdown### Sample Inference Output
+![Inference example](results/inference_photo2.png)
 Sample inference outputs are in `results/inference_*.png`.
 
 ## Project Structure
@@ -85,8 +87,6 @@ Sample inference outputs are in `results/inference_*.png`.
 - `examples/` — Sample personal photographs used for qualitative testing
 - `results/` — Evaluation metrics, plots, and inference outputs
 - `losses.json` — Per-epoch train/val loss history
-
-**Note**: Trained model weights (`best_model.pth`, `final_model.pth`, ~233MB each) are excluded from this repository due to GitHub's file size limits. Run `train.py` to reproduce them.
 
 ## Setup
 

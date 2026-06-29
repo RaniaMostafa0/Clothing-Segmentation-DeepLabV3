@@ -12,9 +12,9 @@ Semantic segmentation (rather than instance segmentation) was chosen because the
 
 - **Backbone**: ResNet101 (ImageNet/COCO-pretrained), encoding 256×256 input down to a 16×16, 2048-channel feature map.
 - **ASPP (Atrous Spatial Pyramid Pooling)**: Parallel atrous convolutions at dilation rates 6, 12, 18, capturing multi-scale context without further downsampling.
-- **Classifier head**:The ASPP features are passed through the DeepLabV3 classifier head, which predicts per-pixel logits for the 11 clothing classes. The prediction is then upsampled to the input image resolution.
-- **Output head**: Final classifier replaced to predict 11 classes instead of the original 21 COCO classes.
-- **Loss**: CrossEntropyLoss (standard for multiclass, mutually-exclusive pixel classification).
+- **Classifier head**: The ASPP features are passed through the DeepLabV3 classifier head. The final 1×1 convolution was replaced to predict 11 clothing classes instead of the original 21 COCO classes. The resulting logits are then upsampled to the input image resolution.
+- **Loss**: CrossEntropyLoss for pixel-wise multiclass classification.
+- Transfer learning was used by initializing the ResNet101 backbone with pretrained weights and replacing the final classification layer to match the 11 clothing classes.
 
 ## Dataset
 
@@ -68,7 +68,7 @@ The model was additionally tested on 45 personal photographs beyond the ATR test
 - **Limitations**: 
   - Small accessory classes (Belt, Sunglasses, Scarf) frequently misclassified.
   - Clothing missed/misclassified when the subject occupies a small fraction of the frame.
-  - Segmentation degrades with 4-6+ people in frame which is expected, since the ATR training dataset consists of single-person images; the model was never exposed to multi-subject scenes during training.
+  - Segmentation degrades with 4-6+ people in frame which is expected, since the ATR training dataset consists of single-person images; the model was primarily trained on single-person images, making generalization to crowded scenes more challenging.
   - Occasional misclassification on unusual camera angles (e.g. overhead shots).
 
 ### Sample Inference Output
